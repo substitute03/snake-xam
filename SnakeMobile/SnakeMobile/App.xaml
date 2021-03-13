@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnakeMobile.App">
+    <Application.Resources>
+
+        <!--Colours-->
+        <Color x:Key="logo-green">#83b271</Color>
+        
+        <!--Buttons-->
+        <Style x:Key="btn-outline-green" TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="VerticalOptions" Value="Start"></Setter>
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <Setter Property="BorderColor" Value="{StaticResource logo-green}"></Setter>
+            <Setter Property="BorderWidth" Value="3"></Setter>
+            <Setter Property="TextColor" Value="{StaticResource logo-green}"></Setter>
+        </Style>
+        
+        <!--Labels-->
+        <Style x:Key="label-standard" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource logo-green}"></Setter>
+            <Setter Property="FontSize" Value="Medium"></Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnakeMobile.Pages.MainMenuPage"
+             xmlns:viewModels="clr-namespace:SnakeMobile.ViewModels"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <viewModels:MainMenuViewModel></viewModels:MainMenuViewModel>
+    </ContentPage.BindingContext>
+    
+    <Grid Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0"
+               Source="SnakeMobileLogo.png"></Image>
+        <Label Grid.Row="1" Grid.Column="0"
+               Style="{StaticResource label-standard}">
+            Difficulty</Label>
+        <Picker Grid.Row="2" Grid.Column="0"
+                ItemsSource="{Binding Difficulties}"
+                x:Name="DifficultyPicker"
+                Title="Select Difficulty"></Picker>
+        <Button Grid.Row="3" Grid.Column="0"
+                x:Name="PlayButton"
+                Margin="50"
+                Style="{StaticResource btn-outline-green}"
+                Text="Play"
+                Clicked="PlayButtonButton_Clicked"></Button>
+    </Grid>
+    
+</ContentPage>

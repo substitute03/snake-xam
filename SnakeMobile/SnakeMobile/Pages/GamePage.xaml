@@ -14,6 +14,7 @@
             <SwipeGestureRecognizer Direction="Down" Swiped="GamePage_OnSwipedDown"/>
             <SwipeGestureRecognizer Direction="Left" Swiped="GamePage_OnSwipedLeft"/>
             <SwipeGestureRecognizer Direction="Right" Swiped="GamePage_OnSwipedRight"/>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  NumberOfTapsRequired="2"/>
         </StackLayout.GestureRecognizers>
 
         <Grid x:Name="GameBoardGrid"></Grid>

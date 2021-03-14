@@ -18,5 +18,10 @@ namespace SnakeMobile.ViewModels
             GameBoard.SpawnSnake();
             GameBoard.SpawnPellet();
         }
+
+        private void GameLoop()
+        {
+
+        }
     }
 }

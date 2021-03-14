@@ -7,7 +7,7 @@ namespace SnakeMobile.Model
 {
     public class Pellet
     {
-        public readonly Color UnitColor = Color.Black;
+        public static readonly Color UnitColor = Color.Black;
         public Cell Cell { get; set; }
 
         public Pellet() { }

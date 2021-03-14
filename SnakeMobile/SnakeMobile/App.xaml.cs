@@ -12,6 +12,7 @@ namespace SnakeMobile
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainMenuPage());
+            //MainPage = new GamePage();
         }
 
         protected override void OnStart()

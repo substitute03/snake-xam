@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SnakeMobile.Model
 {
@@ -13,7 +15,7 @@ namespace SnakeMobile.Model
         public Pellet Pellet { get; set; }
         public int Size { get; private set; }
         public int Length => (Size * Size) - 1;
-        private Random GetRandomNumber = new Random();
+        public bool IsInIllegalState => Snake.IsOutOfBounds || Snake.HasCollidedWithSelf;
 
         public GameBoard Create(int gameBoardSize)
         {
@@ -33,15 +35,12 @@ namespace SnakeMobile.Model
 
         public void SpawnSnake()
         {
-            Snake = new Snake();
-            var cells = new List<Cell>();
+            Snake = new Snake(Size);
+            var cells = new LinkedList<Cell>();
 
-            cells.AddRange(new List<Cell>
-            {
-                Cells[GetCellIndex(7, 7)],
-                Cells[GetCellIndex(7, 8)],
-                Cells[GetCellIndex(7, 9)]
-            });
+            cells.AddLast(Cells[GetCellIndex(7, 7)]);
+            cells.AddLast(Cells[GetCellIndex(7, 8)]);
+            cells.AddLast(Cells[GetCellIndex(7, 9)]);
 
             Snake.Cells = cells;
             Snake.Render();
@@ -50,25 +49,97 @@ namespace SnakeMobile.Model
         public void SpawnPellet()
         {
             Pellet = new Pellet();
-            int cellIndex = 0;
 
-            bool end = false;
-            while (end == false)
-            {
-                cellIndex = GenerateRandomCellIndex();
-
-                if (Cells[cellIndex].IsEmpty)
-                    end = true;
-            }
-
-            Pellet.Cell = Cells[cellIndex];
+            int emptyCellIndex = 
+                GenerateEmptyCellIndex();
+            
+            Pellet.Cell = Cells[emptyCellIndex];
             Pellet.Render();
         }
 
-        private int GenerateRandomCellIndex()
+        private int GenerateEmptyCellIndex()
         {
-            Random rng = new Random();
-            return rng.Next(0, Length);
+            int cellIndex;
+            do
+            {
+                Random rng = new Random();
+                cellIndex = rng.Next(0, Length);
+            }
+            while (!Cells[cellIndex].IsEmpty);
+
+            return cellIndex;
+        }
+
+        public async Task MoveSnake()
+        {
+            Direction directionToMove = Snake.CurrentDirection;
+
+            Point moveToPoint = await GetAdjacentCellCoordinates(directionToMove, Snake.Head);
+
+            if (moveToPoint.X == -1 || moveToPoint.X > Size - 1
+                || moveToPoint.Y == -1 || moveToPoint.Y > Size - 1)
+            {
+                Snake.IsOutOfBounds = true;
+                return;
+            }
+
+            Cell moveToCell = await GetAdjacentCell(directionToMove, Snake.Head);
+
+            Snake.Tail.Color = Cell.UnitColor;
+            Snake.Cells.Remove(Snake.Tail);
+            Snake.Cells.AddFirst(moveToCell);
+
+            await Snake.Render();
+        }
+
+        private Task<Cell> GetAdjacentCell(Direction direction, Cell toCell)
+        {
+            int x = toCell.PositionX;
+            int y = toCell.PositionY;
+
+            if (direction == Direction.Up)
+            {
+                return Task.FromResult(Cells[GetCellIndex(x - 1, y)]);
+            }
+            else if (direction == Direction.Down)
+            {
+                return Task.FromResult(Cells[GetCellIndex(x + 1, y)]);
+            }
+            else if (direction == Direction.Left)
+            {
+                return Task.FromResult(Cells[GetCellIndex(x, y - 1)]);
+            }
+            else
+            {
+                return Task.FromResult(Cells[GetCellIndex(x, y + 1)]);
+            }
+        }
+
+        private Task<Point> GetAdjacentCellCoordinates(Direction direction, Cell toCell)
+        {
+            int x = toCell.PositionX;
+            int y = toCell.PositionY;
+
+            if (direction == Direction.Up)
+            {
+                Cell adjacentCell = Cells[GetCellIndex(x - 1, y)];
+                return Task.FromResult(new Point(adjacentCell.PositionX, adjacentCell.PositionY));
+            }
+            else if (direction == Direction.Down)
+            {
+                Cell adjascentCell = Cells[GetCellIndex(x + 1, y)];
+                return Task.FromResult(new Point(adjascentCell.PositionX, adjascentCell.PositionY));
+            }
+            else if (direction == Direction.Left)
+            {
+                Cell adjascentCell = Cells[GetCellIndex(x, y - 1)];
+                return Task.FromResult(new Point(adjascentCell.PositionX, adjascentCell.PositionY));
+            }
+            else
+            {
+                Cell adjascentCell = Cells[GetCellIndex(x, y + 1)];
+                return Task.FromResult(new Point(adjascentCell.PositionX, adjascentCell.PositionY));
+            }
         }
 
         public int GetCellIndex(int positionX, int positionY)

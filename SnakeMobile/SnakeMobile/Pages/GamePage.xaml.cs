@@ -22,10 +22,10 @@ namespace SnakeMobile.Pages
         public GamePage()
         {
             InitializeComponent();
-
             vm = new GameViewModel();
 
             RenderGameBoard();
+            Task.Run(async () => await GameLoop());
         }
 
         private void RenderGameBoard()
@@ -54,37 +54,48 @@ namespace SnakeMobile.Pages
                     int cellIndex = vm.GameBoard.GetCellIndex(x, y);
                     boxView.BindingContext = vm.GameBoard.Cells[cellIndex];
 
-                    GameBoardGrid.Children.Add(boxView, x, y);
+                    GameBoardGrid.Children.Add(boxView, y, x);
                 }
             }
         }
 
+        private async Task GameLoop()
+        {
+            do
+            {
+                await vm.GameBoard.MoveSnake();
+
+                System.Threading.Thread.Sleep(500);
+
+            } while (vm.GameBoard.Snake.IsOutOfBounds == false);
+        }
+
         private void GamePage_OnSwipedUp(object sender, SwipedEventArgs e)
         {
-            vm.GameBoard.Cells
-                .Single(gc => gc.PositionX == 0 && gc.PositionY == 0)
-                .Color = Color.Red;
+            vm.GameBoard.Snake.ChangeDirection(Direction.Up);
         }
 
         private void GamePage_OnSwipedDown(object sender, SwipedEventArgs e)
         {
-            vm.GameBoard.Cells
-                .Single(gc => gc.PositionX == 0 && gc.PositionY == 0)
-                .Color = Color.Blue;
+            vm.GameBoard.Snake.ChangeDirection(Direction.Down);
         }
 
         private void GamePage_OnSwipedLeft(object sender, SwipedEventArgs e)
         {
-            vm.GameBoard.Cells
-                .Single(gc => gc.PositionX == 0 && gc.PositionY == 0)
-                .Color = Color.Green;
+            vm.GameBoard.Snake.ChangeDirection(Direction.Left);
         }
 
         private void GamePage_OnSwipedRight(object sender, SwipedEventArgs e)
         {
-            vm.GameBoard.Cells
-                .Single(gc => gc.PositionX == 0 && gc.PositionY == 0)
-                .Color = Color.Yellow;
+            vm.GameBoard.Snake.ChangeDirection(Direction.Right);
+        }
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            //Task.Run(async () => await GameLoop());
+
+            //DisplayAlert("Game Over", "Better luck next time.", "Cancel");
+
+            //Navigation.PopAsync();
         }
     }
 }

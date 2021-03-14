@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Xamarin.Forms;
+using System.Drawing;
 
 namespace SnakeMobile.Model
 {
@@ -7,7 +7,7 @@ namespace SnakeMobile.Model
     {
         public int PositionX { get; private set; }
         public int PositionY { get; private set; }
-        public readonly Color UnitColor = Color.LightGray;
+        public static readonly Color UnitColor = Color.LightGray;
 
         private Color _color = Color.LightGray;
         public Color Color

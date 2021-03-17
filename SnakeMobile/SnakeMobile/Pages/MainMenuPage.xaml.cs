@@ -30,7 +30,7 @@ namespace SnakeMobile.Pages
 
         private void PlayButtonButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new GamePage());
+            Navigation.PushModalAsync(new GamePage());
         }
     }
 }

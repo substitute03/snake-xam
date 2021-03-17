@@ -35,7 +35,7 @@ namespace SnakeMobile.Model
 
         public void SpawnSnake()
         {
-            Snake = new Snake(Size);
+            Snake = new Snake();
             var cells = new LinkedList<Cell>();
 
             cells.AddLast(Cells[GetCellIndex(7, 7)]);
@@ -74,10 +74,9 @@ namespace SnakeMobile.Model
         {
             Direction directionToMove = Snake.CurrentDirection;
 
-            Point moveToPoint = await GetAdjacentCellCoordinates(directionToMove, Snake.Head);
+            //Point moveToPoint = await GetAdjacentCellCoordinates(directionToMove, Snake.Head);
 
-            if (moveToPoint.X == -1 || moveToPoint.X > Size - 1
-                || moveToPoint.Y == -1 || moveToPoint.Y > Size - 1)
+            if (await IsAdjacentCellOutOfBounds(directionToMove, Snake.Head))
             {
                 Snake.IsOutOfBounds = true;
                 return;
@@ -85,17 +84,29 @@ namespace SnakeMobile.Model
 
             Cell moveToCell = await GetAdjacentCell(directionToMove, Snake.Head);
 
-            Snake.Tail.Color = Cell.UnitColor;
-            Snake.Cells.Remove(Snake.Tail);
-            Snake.Cells.AddFirst(moveToCell);
+            if (moveToCell.IsEmpty)
+            {
+                Snake.Tail.Color = Cell.UnitColor;
+                Snake.Cells.Remove(Snake.Tail);
+            }
+            else if (moveToCell.Color == Snake.UnitColor)
+            {
+                Snake.HasCollidedWithSelf = true;
+                return;
+            }
+            else if (moveToCell.Color == Pellet.UnitColor)
+            {
+                SpawnPellet();
+            }
 
+            Snake.Cells.AddFirst(moveToCell);
             await Snake.Render();
         }
 
-        private Task<Cell> GetAdjacentCell(Direction direction, Cell toCell)
+        private Task<Cell> GetAdjacentCell(Direction direction, Cell cell)
         {
-            int x = toCell.PositionX;
-            int y = toCell.PositionY;
+            int x = cell.PositionX;
+            int y = cell.PositionY;
 
             if (direction == Direction.Up)
             {
@@ -115,31 +126,58 @@ namespace SnakeMobile.Model
             }
         }
 
-        private Task<Point> GetAdjacentCellCoordinates(Direction direction, Cell toCell)
+        private Task<bool> IsAdjacentCellOutOfBounds(Direction direction, Cell cell)
         {
-            int x = toCell.PositionX;
-            int y = toCell.PositionY;
+            int x = cell.PositionX;
+            int y = cell.PositionY;
+            Point adjacentCoordinates;
+            //Cell adjacentCell = null;
 
             if (direction == Direction.Up)
             {
-                Cell adjacentCell = Cells[GetCellIndex(x - 1, y)];
-                return Task.FromResult(new Point(adjacentCell.PositionX, adjacentCell.PositionY));
+                adjacentCoordinates = new Point(x - 1, y);
             }
             else if (direction == Direction.Down)
             {
-                Cell adjascentCell = Cells[GetCellIndex(x + 1, y)];
-                return Task.FromResult(new Point(adjascentCell.PositionX, adjascentCell.PositionY));
+                adjacentCoordinates = new Point(x + 1, y);
             }
             else if (direction == Direction.Left)
             {
-                Cell adjascentCell = Cells[GetCellIndex(x, y - 1)];
-                return Task.FromResult(new Point(adjascentCell.PositionX, adjascentCell.PositionY));
+                adjacentCoordinates = new Point(x, y - 1);
             }
             else
             {
-                Cell adjascentCell = Cells[GetCellIndex(x, y + 1)];
-                return Task.FromResult(new Point(adjascentCell.PositionX, adjascentCell.PositionY));
+                adjacentCoordinates = new Point(x, y + 1);
             }
+
+            if (adjacentCoordinates.X < 0 || adjacentCoordinates.Y < 0 ||
+                adjacentCoordinates.X > Size - 1 || adjacentCoordinates.Y > Size - 1)
+            {
+                return Task.FromResult(true);
+            }
+
+            return Task.FromResult(false);
+
+            //if (direction == Direction.Up)
+            //{
+            //    adjacentCell = Cells[GetCellIndex(x - 1, y)];          
+            //}
+            //else if (direction == Direction.Down)
+            //{
+            //    adjacentCell = Cells[GetCellIndex(x + 1, y)];
+            //}
+            //else if (direction == Direction.Left)
+            //{
+            //    adjacentCell = Cells[GetCellIndex(x, y - 1)];
+            //}
+            //else
+            //{
+            //    adjacentCell = Cells[GetCellIndex(x, y + 1)];
+            //}
+
+            //return adjacentCell == null
+            //    ? null
+            //    : Task.FromResult(new Point(adjacentCell.PositionX, adjacentCell.PositionY));
         }
 
         public int GetCellIndex(int positionX, int positionY)

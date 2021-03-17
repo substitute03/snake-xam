@@ -25,7 +25,6 @@ namespace SnakeMobile.Pages
             vm = new GameViewModel();
 
             RenderGameBoard();
-            Task.Run(async () => await GameLoop());
         }
 
         private void RenderGameBoard()
@@ -65,9 +64,12 @@ namespace SnakeMobile.Pages
             {
                 await vm.GameBoard.MoveSnake();
 
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(200);
 
-            } while (vm.GameBoard.Snake.IsOutOfBounds == false);
+            } while (vm.GameBoard.Snake.IsOutOfBounds == false &&
+                 vm.GameBoard.Snake.HasCollidedWithSelf == false);
+
+            HandleGameOver();
         }
 
         private void GamePage_OnSwipedUp(object sender, SwipedEventArgs e)
@@ -91,11 +93,12 @@ namespace SnakeMobile.Pages
         }
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            //Task.Run(async () => await GameLoop());
+            Task.Run(async () => await GameLoop());     
+        }
 
-            //DisplayAlert("Game Over", "Better luck next time.", "Cancel");
-
-            //Navigation.PopAsync();
+        private void HandleGameOver()
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

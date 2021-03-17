@@ -8,19 +8,18 @@ namespace SnakeMobile.Model
 {
     public class Snake
     {
-        public readonly Color UnitColor = Color.ForestGreen;
+        public static readonly Color UnitColor = Color.ForestGreen;
         public LinkedList<Cell> Cells { get; set; }
         public Direction CurrentDirection { get; set; } = Direction.Left;
         public bool IsOutOfBounds { get; set; } = false;
-        public bool HasCollidedWithSelf { get; set; }
-        private int GameBoardSize;
+        public bool HasCollidedWithSelf { get; set; } = false;
 
         public Cell Head => Cells.First.Value;
         public Cell Tail => Cells.Last.Value;
 
-        public Snake(int gameBoardSize) 
+        public Snake() 
         {
-            GameBoardSize = gameBoardSize;
+
         }
 
         public Task Render()

@@ -10,18 +10,13 @@ namespace SnakeMobile.ViewModels
     public partial class GameViewModel
     {
         public GameBoard GameBoard { get; set; } = new GameBoard();
-        public const int GameBoardSize = 15;
+        public const int GameBoardSize = 12;
 
         public GameViewModel()
         {
             GameBoard = GameBoard.Create(GameBoardSize);
             GameBoard.SpawnSnake();
             GameBoard.SpawnPellet();
-        }
-
-        private void GameLoop()
-        {
-
         }
     }
 }

@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SnakeMobile.ViewModels"
+             xmlns:valueConverters="clr-namespace:SnakeMobile.ValueConverters"
              x:Class="SnakeMobile.Pages.GamePage"
              Padding="5">
     <ContentPage.BindingContext>
         <viewModels:GameViewModel></viewModels:GameViewModel>
     </ContentPage.BindingContext>
-    
+
     <StackLayout>
         <StackLayout.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Up" Swiped="GamePage_OnSwipedUp"/>
@@ -19,9 +20,28 @@
 
         <Grid x:Name="GameBoardGrid" Margin="50"></Grid>
 
-        <BoxView x:Name="ControlsBoxView" VerticalOptions="FillAndExpand">
+        <Grid x:Name="GameStatsGrid" Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-        </BoxView>
+            <Label x:Name="ScoreTitleLabel"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   FontSize="Large"
+                   Text="Score: "></Label>
+            <Label x:Name="ScoreLabel"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   FontSize="Large"
+                   Text="{Binding Game.Score}"></Label>
+        </Grid>
         
     </StackLayout>
 

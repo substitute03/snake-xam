@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SnakeMobile.Model
@@ -74,8 +73,6 @@ namespace SnakeMobile.Model
         {
             Direction directionToMove = Snake.CurrentDirection;
 
-            //Point moveToPoint = await GetAdjacentCellCoordinates(directionToMove, Snake.Head);
-
             if (await IsAdjacentCellOutOfBounds(directionToMove, Snake.Head))
             {
                 Snake.IsOutOfBounds = true;
@@ -96,6 +93,7 @@ namespace SnakeMobile.Model
             }
             else if (moveToCell.Color == Pellet.UnitColor)
             {
+                Snake.ConsumePellet();
                 SpawnPellet();
             }
 

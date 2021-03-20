@@ -22,9 +22,18 @@
     <EmbeddedResource Update="Pages\MainMenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\GameResultsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Enums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\GameResultsPage.xaml.cs">
+      <DependentUpon>GameResultsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

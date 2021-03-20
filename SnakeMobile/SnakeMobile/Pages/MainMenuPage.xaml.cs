@@ -20,8 +20,8 @@ namespace SnakeMobile.Pages
         {
             InitializeComponent();
 
-            DifficultyPicker.ItemsSource = Difficulties;
-            DifficultyPicker.SelectedIndex = 0;
+            //DifficultyPicker.ItemsSource = Difficulties;
+            //DifficultyPicker.SelectedIndex = 0;
         }
 
         private void PlayButtonButton_Clicked(object sender, EventArgs e)

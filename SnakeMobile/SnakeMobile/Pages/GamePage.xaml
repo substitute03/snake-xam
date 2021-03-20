@@ -40,7 +40,8 @@
                    Grid.Row="0"
                    Grid.Column="1"
                    FontSize="Large"
-                   Text="{Binding Game.Score}"></Label>
+                   Text="{Binding Game.Score, Mode=OneWay}"></Label>
+            
         </Grid>
         
     </StackLayout>

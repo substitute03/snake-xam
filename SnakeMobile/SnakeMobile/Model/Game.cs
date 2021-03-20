@@ -22,17 +22,10 @@ namespace SnakeMobile.Model
         }
 
         private DateTime startTime;
-        private DateTime currentTime;
-        private TimeSpan _duration;
+        private DateTime endTime;
         public TimeSpan Duration
         {
-            get => _duration;
-            set
-            {
-                _duration = currentTime - startTime;
-
-                TimeSpan span = currentTime - startTime;
-            }
+            get => endTime - startTime;
         }
 
         public Game()
@@ -42,14 +35,18 @@ namespace SnakeMobile.Model
 
         public async Task StartGameLoop()
         {
+            startTime = DateTime.UtcNow;
+
             do
             {
                 await GameBoard.MoveSnake();
+
                 Score = GameBoard.Snake.CountPelletsConsumed;
 
                 System.Threading.Thread.Sleep(200);
-
             } while (!GameBoard.IsInIllegalState);
+
+            endTime = DateTime.UtcNow;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -80,12 +80,19 @@ namespace SnakeMobile.Pages
         }
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            Task.Run(async () => await GameLoop());     
+            Task.Run(async () => await GameLoop());
         }
 
         private void HandleGameOver()
         {
-            Navigation.PopModalAsync();
+            
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // Pop the GamePage
+                Navigation.PopModalAsync();
+                Navigation.PushModalAsync(new GameResultsPage(vm.Game.Score, vm.Game.Duration));
+            });
+            
         }
     }
 }

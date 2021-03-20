@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SnakeMobile.ViewModels"
+             x:Class="SnakeMobile.Pages.GameResultsPage">
+    <ContentPage.BindingContext>
+        <viewModels:GameResultsViewModel></viewModels:GameResultsViewModel>
+    </ContentPage.BindingContext>
+
+    <StackLayout Margin="10">
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Text="Game Results"
+                   HorizontalTextAlignment="Center"
+                   FontSize="50"></Label>
+
+            <Label x:Name="ScoreTitleLabel"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   FontSize="Large"
+                   Text="Score: "></Label>
+            <Label x:Name="ScoreLabel"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   FontSize="Large"
+                   Text="{Binding FinalScore}"></Label>
+
+            <Label x:Name="GameDurationTitleLabel"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   FontSize="Large"
+                   Text="Duration: "></Label>
+            <Label x:Name="GameDurationLabel"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   FontSize="Large"
+                   Text="{Binding GameDuration, StringFormat='{}{0:mm\\:ss}'}"></Label>
+        </Grid>
+
+        <Button x:Name="MainMenuButton"
+                Text="Main Menu"
+                Margin="20"
+                Clicked="MainMenuButton_OnClicked"></Button>
+
+    </StackLayout>
+</ContentPage>

@@ -1,17 +1,19 @@
-﻿using System;
+﻿using SnakeMobile.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace SnakeMobile.ViewModels
 {
     public class MainMenuViewModel
     {
-        public List<String> Difficulties
+        public string[] ControlsSchemes 
         {
-            get => new List<string>
+            get
             {
-                "Normal", "Hard", "Insanity"
-            };
+                return Enum.GetNames(typeof(ControlScheme));
+            }
         }
     }
 }

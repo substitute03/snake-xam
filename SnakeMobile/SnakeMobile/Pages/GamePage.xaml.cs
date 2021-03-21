@@ -14,12 +14,20 @@ namespace SnakeMobile.Pages
     {
         GameViewModel vm;
 
-        public GamePage()
+        public GamePage(ControlScheme controlScheme)
         {
             vm = new GameViewModel();
             InitializeComponent();
             BindingContext = vm;
             RenderGameBoard();
+
+            if (controlScheme == ControlScheme.Swipe)
+            {
+                AddSwipeControls();
+            }
+            else AddButtonControls();
+
+
         }
 
         private void RenderGameBoard()
@@ -51,6 +59,35 @@ namespace SnakeMobile.Pages
                     GameBoardGrid.Children.Add(boxView, y, x);
                 }
             }
+        }
+
+        private void AddSwipeControls()
+        {
+            GamePageStackLayout.GestureRecognizers.Add(new SwipeGestureRecognizer 
+            {
+                Direction = SwipeDirection.Up,
+                Command = vm.MoveSnakeUp
+            });
+            GamePageStackLayout.GestureRecognizers.Add(new SwipeGestureRecognizer
+            {
+                Direction = SwipeDirection.Down,
+                Command = vm.MoveSnakeDown
+            });
+            GamePageStackLayout.GestureRecognizers.Add(new SwipeGestureRecognizer
+            {
+                Direction = SwipeDirection.Left,
+                Command = vm.MoveSnakeLeft
+            });
+            GamePageStackLayout.GestureRecognizers.Add(new SwipeGestureRecognizer
+            {
+                Direction = SwipeDirection.Right,
+                Command = vm.MoveSnakeRight
+            });
+        }
+
+        private void AddButtonControls()
+        {
+            ControlsGrid.IsVisible = true;
         }
 
         private async Task StartGame()

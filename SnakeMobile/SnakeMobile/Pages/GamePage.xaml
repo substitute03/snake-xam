@@ -9,18 +9,17 @@
         <viewModels:GameViewModel></viewModels:GameViewModel>
     </ContentPage.BindingContext>
 
-    <StackLayout>
+    <StackLayout x:Name="GamePageStackLayout">
         <StackLayout.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Up" Command="{Binding MoveSnakeUp}"/>
+            <!--<SwipeGestureRecognizer Direction="Up" Command="{Binding MoveSnakeUp}"/>
             <SwipeGestureRecognizer Direction="Down" Command="{Binding MoveSnakeDown}"/>
             <SwipeGestureRecognizer Direction="Left" Command="{Binding MoveSnakeLeft}"/>
-            <SwipeGestureRecognizer Direction="Right" Command="{Binding MoveSnakeRight}"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding MoveSnakeRight}"/>-->
             <TapGestureRecognizer Tapped="GamePage_OnTappedTwice" NumberOfTapsRequired="2"/>
         </StackLayout.GestureRecognizers>
-
-        <Grid x:Name="GameBoardGrid" Margin="50"></Grid>
-
-        <Grid x:Name="GameStatsGrid" Margin="50">
+        
+        <Grid x:Name="GameStatsGrid"
+              Margin="50,5,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
@@ -41,7 +40,54 @@
                    Grid.Column="1"
                    FontSize="Large"
                    Text="{Binding Game.Score, Mode=OneWay}"></Label>
-            
+
+        </Grid>
+
+        <Grid x:Name="GameBoardGrid" Margin="50, 0, 50, 10"></Grid>
+
+        <Grid x:Name="ControlsGrid" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="false">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0"
+                    Grid.Column="0"
+                    FontSize="50"
+                    Command="{Binding MoveSnakeUp}"
+                    Text="↑"></Button>
+            <Button Grid.Row="0"
+                    Grid.Column="2"
+                    FontSize="50"
+                    Command="{Binding MoveSnakeUp}"
+                    Text="↑"></Button>
+            <Button Grid.Row="2"
+                    Grid.Column="0"
+                    FontSize="50"
+                    Command="{Binding MoveSnakeDown}"
+                    Text="↓"></Button>
+            <Button Grid.Row="2"
+                    Grid.Column="2"
+                    FontSize="50"
+                    Command="{Binding MoveSnakeDown}"
+                    Text="↓"
+                    ></Button>
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="50"
+                    Command="{Binding MoveSnakeLeft}"
+                    Text="←"></Button>
+            <Button Grid.Row="1"
+                    Grid.Column="2"
+                    FontSize="50"
+                    Command="{Binding MoveSnakeRight}"
+                    Text="→"></Button>
         </Grid>
         
     </StackLayout>

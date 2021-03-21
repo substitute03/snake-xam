@@ -27,22 +27,22 @@ namespace SnakeMobile.ViewModels
             MoveSnakeRight = new Command(MoveRight);
         }
 
-        public void MoveUp()
+        private void MoveUp()
         {
             Game.GameBoard.Snake.ChangeDirection(Direction.Up);
         }
 
-        public void MoveDown()
+        private void MoveDown()
         {
             Game.GameBoard.Snake.ChangeDirection(Direction.Down);
         }
 
-        public void MoveLeft()
+        private void MoveLeft()
         {
             Game.GameBoard.Snake.ChangeDirection(Direction.Left);
         }
 
-        public void MoveRight()
+        private void MoveRight()
         {
             Game.GameBoard.Snake.ChangeDirection(Direction.Right);
         }

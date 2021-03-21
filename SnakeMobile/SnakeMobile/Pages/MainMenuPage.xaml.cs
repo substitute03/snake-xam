@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnakeMobile.Enums;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,25 +9,25 @@ namespace SnakeMobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainMenuPage : ContentPage
     {
-        public List<String> Difficulties 
-        { 
-            get => new List<string> 
-            {
-                "Normal", "Hard", "Insanity" 
-            };
-        }
-
         public MainMenuPage()
         {
             InitializeComponent();
 
-            //DifficultyPicker.ItemsSource = Difficulties;
-            //DifficultyPicker.SelectedIndex = 0;
+            ControlSchemePicker.ItemsSource = Enum.GetValues(typeof(ControlScheme));
+            ControlSchemePicker.SelectedIndex = 0;
         }
 
         private void PlayButtonButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new GamePage());
+            if (ControlSchemePicker.SelectedItem != null)
+            {
+                string selectedPickerItem = ControlSchemePicker.SelectedItem?.ToString();
+
+                ControlScheme selectedControlScheme;
+                Enum.TryParse(selectedPickerItem, out selectedControlScheme);
+
+                Navigation.PushModalAsync(new GamePage(selectedControlScheme));
+            }
         }
     }
 }

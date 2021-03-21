@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 
-namespace SnakeMobile.Model
+namespace SnakeMobile.Domain.Model
 {
     public class Cell : INotifyPropertyChanged
     {

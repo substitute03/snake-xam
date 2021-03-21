@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SnakeMobile.Model
+namespace SnakeMobile.Domain.Model
 {
     public class GameResults
     {

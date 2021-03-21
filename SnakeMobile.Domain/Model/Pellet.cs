@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace SnakeMobile.Model
+namespace SnakeMobile.Domain.Model
 {
     public class Pellet
     {

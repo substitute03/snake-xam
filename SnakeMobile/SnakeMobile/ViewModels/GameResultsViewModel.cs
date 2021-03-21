@@ -1,4 +1,4 @@
-﻿using SnakeMobile.Model;
+﻿using SnakeMobile.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

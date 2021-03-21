@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMobile.Android", "SnakeMobile\SnakeMobile.Android\SnakeMobile.Android.csproj", "{29098054-24F5-41A5-B2B6-4EC3CF39C8C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMobile", "SnakeMobile\SnakeMobile\SnakeMobile.csproj", "{0ACE0A55-EDD6-4936-9518-57D6749EA14D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnakeMobile", "SnakeMobile\SnakeMobile\SnakeMobile.csproj", "{0ACE0A55-EDD6-4936-9518-57D6749EA14D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMobile.Domain", "SnakeMobile.Domain\SnakeMobile.Domain.csproj", "{45F75234-08D6-4BFC-A10C-46A27DCAA545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{0ACE0A55-EDD6-4936-9518-57D6749EA14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ACE0A55-EDD6-4936-9518-57D6749EA14D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0ACE0A55-EDD6-4936-9518-57D6749EA14D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{45F75234-08D6-4BFC-A10C-46A27DCAA545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F75234-08D6-4BFC-A10C-46A27DCAA545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F75234-08D6-4BFC-A10C-46A27DCAA545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F75234-08D6-4BFC-A10C-46A27DCAA545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

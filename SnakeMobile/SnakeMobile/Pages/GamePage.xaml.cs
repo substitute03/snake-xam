@@ -1,5 +1,5 @@
 ﻿using SnakeMobile.Enums;
-using SnakeMobile.Model;
+using SnakeMobile.Domain.Model;
 using SnakeMobile.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -48,7 +48,7 @@ namespace SnakeMobile.Pages
                     var boxView = new BoxView();
 
                     boxView.SetBinding(BoxView.ColorProperty, nameof(
-                        Model.Cell.Color), BindingMode.OneWay, null);
+                        Domain.Model.Cell.Color), BindingMode.OneWay, null);
 
                     int cellIndex = vm.Game.GameBoard.GetCellIndex(x, y);
                     boxView.BindingContext = vm.Game.GameBoard.Cells[cellIndex];

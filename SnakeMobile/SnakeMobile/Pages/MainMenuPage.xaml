@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnakeMobile.Pages.MainMenuPage"
              xmlns:viewModels="clr-namespace:SnakeMobile.ViewModels"
-             xmlns:enums="clr-namespace:SnakeMobile.Enums"
              BackgroundColor="White">
 
     <ContentPage.BindingContext>

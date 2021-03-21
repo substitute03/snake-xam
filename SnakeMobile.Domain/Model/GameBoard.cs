@@ -1,12 +1,12 @@
-﻿using SnakeMobile.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeMobile.Model
+namespace SnakeMobile.Domain.Model
 {
     public class GameBoard
     {
@@ -50,9 +50,9 @@ namespace SnakeMobile.Model
         {
             Pellet = new Pellet();
 
-            int emptyCellIndex = 
+            int emptyCellIndex =
                 GenerateEmptyCellIndex();
-            
+
             Pellet.Cell = Cells[emptyCellIndex];
             Pellet.Render();
         }
@@ -130,7 +130,6 @@ namespace SnakeMobile.Model
             int x = cell.PositionX;
             int y = cell.PositionY;
             Point adjacentCoordinates;
-            //Cell adjacentCell = null;
 
             if (direction == Direction.Up)
             {
@@ -156,27 +155,6 @@ namespace SnakeMobile.Model
             }
 
             return Task.FromResult(false);
-
-            //if (direction == Direction.Up)
-            //{
-            //    adjacentCell = Cells[GetCellIndex(x - 1, y)];          
-            //}
-            //else if (direction == Direction.Down)
-            //{
-            //    adjacentCell = Cells[GetCellIndex(x + 1, y)];
-            //}
-            //else if (direction == Direction.Left)
-            //{
-            //    adjacentCell = Cells[GetCellIndex(x, y - 1)];
-            //}
-            //else
-            //{
-            //    adjacentCell = Cells[GetCellIndex(x, y + 1)];
-            //}
-
-            //return adjacentCell == null
-            //    ? null
-            //    : Task.FromResult(new Point(adjacentCell.PositionX, adjacentCell.PositionY));
         }
 
         public int GetCellIndex(int positionX, int positionY)

@@ -1,8 +1,9 @@
 ﻿using SnakeMobile.Enums;
-using SnakeMobile.Model;
+using SnakeMobile.Domain.Model;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using SnakeMobile.Helpers;
 
 namespace SnakeMobile.ViewModels
 {
@@ -49,7 +50,11 @@ namespace SnakeMobile.ViewModels
 
         public async Task<GameResults> StartGame()
         {
-            return await Task.Run(async () => await Game.StartGameLoop());
+            var results = await Task.Run(async () => await Game.StartGameLoop());
+
+            AudioHelper.PlayGameOverSound();
+
+            return results;
         }
     }
 }

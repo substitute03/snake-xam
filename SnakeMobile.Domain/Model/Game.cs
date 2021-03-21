@@ -1,16 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
-using SnakeMobile.Enums;
-using SnakeMobile.Helpers;
 
-namespace SnakeMobile.Model
+namespace SnakeMobile.Domain.Model
 {
     public class Game : INotifyPropertyChanged
     {
-        private AudioHelper audioHelper;
         public GameBoard GameBoard { get; set; }
 
         private int _score;
@@ -53,18 +50,7 @@ namespace SnakeMobile.Model
 
             GameResults results = new GameResults(Score, Duration);
 
-            AudioHelper.PlayGameOverSound();
-
             return results;
-        }
-
-        Stream GetStreamFromFile(string filename)
-        {
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-
-            var stream = assembly.GetManifestResourceStream("SnakeMobile." + filename);
-
-            return stream;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

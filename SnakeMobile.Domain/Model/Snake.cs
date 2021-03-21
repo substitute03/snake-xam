@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeMobile.Model
+namespace SnakeMobile.Domain.Model
 {
     public class Snake
     {

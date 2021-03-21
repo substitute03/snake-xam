@@ -6,7 +6,7 @@ namespace SnakeMobile.Helpers
 {
     public class AudioHelper
     {
-        // Don't this any of this will play async because the audio.Load and Play methods are not async.
+        // TODO: Will not play async because the audio.Load and Play methods are not async.
         public static async Task PlayPelletEatenSoundAsync()
         {
             ISimpleAudioPlayer audio = CrossSimpleAudioPlayer.Current;

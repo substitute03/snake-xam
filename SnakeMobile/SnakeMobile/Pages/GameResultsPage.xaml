@@ -8,8 +8,8 @@
     </ContentPage.BindingContext>
 
     <StackLayout Margin="10">
-        
-        <Grid>
+
+        <Grid RowSpacing="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -18,6 +18,7 @@
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0"
@@ -47,12 +48,17 @@
                    Grid.Column="1"
                    FontSize="Large"
                    Text="{Binding GameDuration, StringFormat='{}{0:mm\\:ss}'}"></Label>
+
+            <Button x:Name="MainMenuButton"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Text="Main Menu"
+                    Margin="100,20,100,0"
+                    Padding="30"
+                    Clicked="MainMenuButton_OnClicked"></Button>
         </Grid>
 
-        <Button x:Name="MainMenuButton"
-                Text="Main Menu"
-                Margin="20"
-                Clicked="MainMenuButton_OnClicked"></Button>
-
     </StackLayout>
+    
 </ContentPage>

@@ -1,6 +1,5 @@
 ﻿using SnakeMobile.Enums;
 using SnakeMobile.Model;
-using SnakeMobile.ValueConverters;
 using SnakeMobile.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -26,8 +25,6 @@ namespace SnakeMobile.Pages
                 AddSwipeControls();
             }
             else AddButtonControls();
-
-
         }
 
         private void RenderGameBoard()
@@ -36,7 +33,7 @@ namespace SnakeMobile.Pages
             {
                 GameBoardGrid.RowDefinitions.Add(new RowDefinition
                 {
-                    Height = 35,
+                    Height = new GridLength(1, GridUnitType.Star)
                 });
                 GameBoardGrid.ColumnDefinitions.Add(new ColumnDefinition
                 {
@@ -112,6 +109,10 @@ namespace SnakeMobile.Pages
 
         private void GamePage_OnTappedTwice(object sender, EventArgs e)
         {
+            TapToStartLabel.IsVisible = false;
+            ScoreTitleLabel.IsVisible = true;
+            ScoreLabel.IsVisible = true;
+
             Task.Run(StartGame);
         }
     }

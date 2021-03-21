@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnakeMobile.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,10 +11,10 @@ namespace SnakeMobile.ViewModels
         public TimeSpan GameDuration { get; private set; }
 
         public GameResultsViewModel() { }
-        public GameResultsViewModel(int finalScore, TimeSpan gameDuration)
+        public GameResultsViewModel(GameResults results)
         {
-            FinalScore = finalScore;
-            GameDuration = gameDuration;
+            FinalScore = results.Score;
+            GameDuration = results.Duration;
         }
     }
 }

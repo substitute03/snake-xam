@@ -1,4 +1,5 @@
-﻿using SnakeMobile.ViewModels;
+﻿using SnakeMobile.Model;
+using SnakeMobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace SnakeMobile.Pages
     {
         private readonly GameResultsViewModel vm;
 
-        public GameResultsPage(int finalScore, TimeSpan gameDuration)
+        public GameResultsPage(GameResults results)
         {
-            vm = new GameResultsViewModel(finalScore, gameDuration);
+            vm = new GameResultsViewModel(results);
             InitializeComponent();
             BindingContext = vm;
         }

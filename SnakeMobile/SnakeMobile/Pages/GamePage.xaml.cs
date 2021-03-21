@@ -1,4 +1,5 @@
-﻿using SnakeMobile.Model;
+﻿using SnakeMobile.Enums;
+using SnakeMobile.Model;
 using SnakeMobile.ValueConverters;
 using SnakeMobile.ViewModels;
 using System;
@@ -52,47 +53,29 @@ namespace SnakeMobile.Pages
             }
         }
 
-        private async Task GameLoop()
+        private async Task StartGame()
         {
-            await vm.Game.StartGameLoop();
+            GameResults results = await vm.StartGame();
 
-            HandleGameOver();
+            HandleGameOver(results);
         }
 
-        private void GamePage_OnSwipedUp(object sender, SwipedEventArgs e)
+        private void HandleGameOver(GameResults results)
         {
-            vm.Game.GameBoard.Snake.ChangeDirection(Direction.Up);
-        }
+            GameResultsPage gameResultsPage = new GameResultsPage(results);
 
-        private void GamePage_OnSwipedDown(object sender, SwipedEventArgs e)
-        {
-            vm.Game.GameBoard.Snake.ChangeDirection(Direction.Down);
-        }
-
-        private void GamePage_OnSwipedLeft(object sender, SwipedEventArgs e)
-        {
-            vm.Game.GameBoard.Snake.ChangeDirection(Direction.Left);
-        }
-
-        private void GamePage_OnSwipedRight(object sender, SwipedEventArgs e)
-        {
-            vm.Game.GameBoard.Snake.ChangeDirection(Direction.Right);
-        }
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            Task.Run(async () => await GameLoop());
-        }
-
-        private void HandleGameOver()
-        {
-            
             Device.BeginInvokeOnMainThread(() =>
             {
-                // Pop the GamePage
+              // Pop the GamePage
                 Navigation.PopModalAsync();
-                Navigation.PushModalAsync(new GameResultsPage(vm.Game.Score, vm.Game.Duration));
+                Navigation.PushModalAsync(gameResultsPage);
             });
             
+        }
+
+        private void GamePage_OnTappedTwice(object sender, EventArgs e)
+        {
+            Task.Run(StartGame);
         }
     }
 }

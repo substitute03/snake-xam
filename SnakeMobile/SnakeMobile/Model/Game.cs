@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using SnakeMobile.Enums;
 using SnakeMobile.Helpers;
 
 namespace SnakeMobile.Model
@@ -35,7 +36,7 @@ namespace SnakeMobile.Model
             GameBoard = new GameBoard();
         }
 
-        public async Task StartGameLoop()
+        public async Task<GameResults> StartGameLoop()
         {
             startTime = DateTime.UtcNow;
 
@@ -49,7 +50,12 @@ namespace SnakeMobile.Model
             } while (!GameBoard.IsInIllegalState);
 
             endTime = DateTime.UtcNow;
+
+            GameResults results = new GameResults(Score, Duration);
+
             AudioHelper.PlayGameOverSound();
+
+            return results;
         }
 
         Stream GetStreamFromFile(string filename)

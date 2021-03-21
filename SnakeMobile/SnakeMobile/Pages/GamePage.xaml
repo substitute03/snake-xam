@@ -2,20 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SnakeMobile.ViewModels"
-             xmlns:valueConverters="clr-namespace:SnakeMobile.ValueConverters"
              x:Class="SnakeMobile.Pages.GamePage"
              Padding="5">
+    
     <ContentPage.BindingContext>
         <viewModels:GameViewModel></viewModels:GameViewModel>
     </ContentPage.BindingContext>
 
     <StackLayout>
         <StackLayout.GestureRecognizers>
-            <SwipeGestureRecognizer Direction="Up" Swiped="GamePage_OnSwipedUp"/>
-            <SwipeGestureRecognizer Direction="Down" Swiped="GamePage_OnSwipedDown"/>
-            <SwipeGestureRecognizer Direction="Left" Swiped="GamePage_OnSwipedLeft"/>
-            <SwipeGestureRecognizer Direction="Right" Swiped="GamePage_OnSwipedRight"/>
-            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  NumberOfTapsRequired="2"/>
+            <SwipeGestureRecognizer Direction="Up" Command="{Binding MoveSnakeUp}"/>
+            <SwipeGestureRecognizer Direction="Down" Command="{Binding MoveSnakeDown}"/>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding MoveSnakeLeft}"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding MoveSnakeRight}"/>
+            <TapGestureRecognizer Tapped="GamePage_OnTappedTwice" NumberOfTapsRequired="2"/>
         </StackLayout.GestureRecognizers>
 
         <Grid x:Name="GameBoardGrid" Margin="50"></Grid>

@@ -1,5 +1,5 @@
 # SnakeMobile
-SnakeMobile is the classic Snake game built in .NET and Xamarin.
+SnakeXam is a mobiles versio of the classic Snake game built in .NET and Xamarin.
 
 ## Overview
 

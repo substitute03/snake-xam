@@ -1,5 +1,5 @@
 # SnakeMobile
-SnakeXam is a mobiles versio of the classic Snake game built in .NET and Xamarin.
+SnakeXam is a mobiles version of the classic Snake game built in .NET and Xamarin.
 
 ## Overview
 
@@ -14,3 +14,4 @@ The Snake is controlled using the swipe commands, or using on screen buttons. Yo
 ## Device
 
 The game was built and optimised for the Google Nexus 7.
+
